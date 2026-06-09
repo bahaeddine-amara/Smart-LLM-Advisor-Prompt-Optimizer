@@ -1,0 +1,8 @@
+backend/advisor/target/
+frontend/node_modules/
+frontend/dist/
+.vscode/
+.idea/
+*.class
+Thumbs.db
+.DS_Store
