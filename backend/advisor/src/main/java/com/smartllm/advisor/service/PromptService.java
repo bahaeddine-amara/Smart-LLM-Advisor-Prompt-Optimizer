@@ -40,15 +40,30 @@ public class PromptService {
                 .user(user)
                 .build();
 
-        Prompt saved = promptRepository.save(prompt);
-        return toDto(saved);
+        return toDto(promptRepository.save(prompt));
     }
 
-    public Page<PromptDto> getHistory(int page, int size) {
+    public Page<PromptDto> getHistory(int page, int size, String category, String search) {
         User user = getCurrentUser();
         Pageable pageable = PageRequest.of(page, size);
-        return promptRepository.findByUserIdOrderByCreatedAtDesc(user.getId(), pageable)
-                .map(this::toDto);
+        Long userId = user.getId();
+
+        boolean hasCategory = category != null && !category.isBlank();
+        boolean hasSearch   = search   != null && !search.isBlank();
+
+        if (hasCategory && hasSearch) {
+            return promptRepository.searchByUserIdAndCategoryAndText(userId, category, search, pageable)
+                    .map(this::toDto);
+        } else if (hasCategory) {
+            return promptRepository.findByUserIdAndCategoryOrderByCreatedAtDesc(userId, category, pageable)
+                    .map(this::toDto);
+        } else if (hasSearch) {
+            return promptRepository.searchByUserIdAndText(userId, search, pageable)
+                    .map(this::toDto);
+        } else {
+            return promptRepository.findByUserIdOrderByCreatedAtDesc(userId, pageable)
+                    .map(this::toDto);
+        }
     }
 
     public void delete(Long id) {

@@ -65,6 +65,13 @@ public class RecommendationService {
             case "Programming" ->
                 model.getCodingScore().doubleValue() * 0.7
                 + model.getOverallScore().doubleValue() * 0.3;
+            case "Machine Learning", "Data Science" ->
+                model.getCodingScore().doubleValue() * 0.5
+                + model.getResearchScore().doubleValue() * 0.3
+                + model.getOverallScore().doubleValue() * 0.2;
+            case "DevOps" ->
+                model.getCodingScore().doubleValue() * 0.6
+                + model.getOverallScore().doubleValue() * 0.4;
             case "Writing" ->
                 model.getWritingScore().doubleValue() * 0.7
                 + model.getOverallScore().doubleValue() * 0.3;
