@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Analyze from './pages/Analyze';
 import History from './pages/History';
+import Templates from './pages/Templates';
+import AbTest from './pages/AbTest';
 
 function PrivateRoute({ children }: { children: ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -16,20 +18,13 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login"    element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route
-        path="/dashboard"
-        element={<PrivateRoute><Dashboard /></PrivateRoute>}
-      />
-      <Route
-        path="/analyze"
-        element={<PrivateRoute><Analyze /></PrivateRoute>}
-      />
-      <Route
-        path="/history"
-        element={<PrivateRoute><History /></PrivateRoute>}
-      />
+      <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+      <Route path="/analyze"   element={<PrivateRoute><Analyze /></PrivateRoute>} />
+      <Route path="/history"   element={<PrivateRoute><History /></PrivateRoute>} />
+      <Route path="/templates" element={<PrivateRoute><Templates /></PrivateRoute>} />
+      <Route path="/ab-test"   element={<PrivateRoute><AbTest /></PrivateRoute>} />
     </Routes>
   );
 }
