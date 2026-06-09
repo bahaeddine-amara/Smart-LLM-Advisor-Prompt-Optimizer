@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.smartllm.advisor.AdvisorApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.326 s -- in com.smartllm.advisor.AdvisorApplicationTests
